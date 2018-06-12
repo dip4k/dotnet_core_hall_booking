@@ -72,17 +72,17 @@ GO
 
 > Open Package Manager Console and run these
 
-    ```bash
-    # Go to Tools > NuGet Package Manager > Package Manager Console
+```sh
+# Go to Tools > NuGet Package Manager > Package Manager Console
 
-    Install-Package Microsoft.EntityFrameworkCore.SqlServer
+Install-Package Microsoft.EntityFrameworkCore.SqlServer
 
-    Install-Package Microsoft.EntityFrameworkCore.Tools
-    ```
+Install-Package Microsoft.EntityFrameworkCore.Tools
+```
 
 ### generate Models from DB Table
 
-```cmd
+```sh
     Scaffold-DbContext "Server=(localdb)\mssqllocaldb;Database=HallBooking;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
 ```
 
@@ -100,7 +100,7 @@ GO
         // And choose value of 'Default' key
     ```
 3.  Add ConnectionString to appsettings.json
-    ```json
+    ```js
         "ConnectionStrings": {
             "DefaultConnection": "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=HallBooking;Integrated Security=True"
         }

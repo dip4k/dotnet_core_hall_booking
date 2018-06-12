@@ -15,6 +15,9 @@ namespace MarriageHall.Controllers
   {
     private readonly HallBookingContext _context;
 
+    // HallbookingContext object will be injected by dotnet core engine
+    // Configuration for this is written in startup.cs file
+    // This is called dependency injection
     public CustomersController(HallBookingContext context)
     {
       _context = context;
@@ -22,22 +25,48 @@ namespace MarriageHall.Controllers
 
     // GET: api/<controller>
     [HttpGet]
-    public IEnumerable<Customer> Get()
+    public IActionResult Get()
     {
-      return _context.Customer.ToList();
+      var result = _context.Customer.ToList();
+      return Ok(result);
     }
 
     // GET api/<controller>/5
     [HttpGet("{id}")]
-    public string Get(int id)
+    public Customer Get(int id)
     {
-      return "value";
+      // here id is customerId (primary key from table)
+      return _context.Customer.Find(id);
     }
 
     // POST api/<controller>
-    [HttpPost]
-    public void Post([FromBody]string value)
+    //[HttpPost]
+    //public void Post([FromBody]Customer value)
+    //{
+
+    //}
+
+    [HttpPost("login")]
+    public IActionResult Login([FromBody] Customer customer)
     {
+      var result = _context.Customer.FirstOrDefault(c => c.UserName == customer.UserName && c.Password == customer.Password);
+      if (result == null)
+        return NotFound();
+      return Ok(result);
+    }
+
+    [HttpPost]
+    public IActionResult CreateCustomer([FromBody] Customer customer)
+    {
+      if (!ModelState.IsValid)
+        return BadRequest(ModelState);
+
+      _context.Customer.Add(customer);
+      _context.SaveChanges();
+
+      var result = _context.Customer.FirstOrDefault(c => c.CustomerId == customer.CustomerId);
+      result.Password = null;
+      return Ok(result);
     }
 
     // PUT api/<controller>/5

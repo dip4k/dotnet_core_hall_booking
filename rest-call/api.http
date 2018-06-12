@@ -1,0 +1,13 @@
+
+@curl = https://localhost:44318/api/customers
+Get {{curl}}
+
+###
+
+POST {{curl}}/login
+content-type: application/json
+
+{
+    "userName": "dipak",
+    "password": "qwerty"
+  }

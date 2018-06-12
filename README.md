@@ -95,7 +95,7 @@ GO
 2.  Register and configure your context in Startup.cs
     ```cs
     // Add line to configureServices method
-    services.AddDbContext<HallBookingContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
+    services.AddDbContext<HallBookingContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         // Configuration.GetConnectionString("Default") reads appsettings.json file.
         // And choose value of 'Default' key
     ```

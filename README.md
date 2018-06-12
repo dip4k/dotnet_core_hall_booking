@@ -1,11 +1,32 @@
 ﻿## Requirements
 
 1.  Dotnet core [sdk](https://www.microsoft.com/net/download/windows) 2.1 or later
-2.  Visual studio 2017 version 15.3 or later
+2.  Visual studio 2017 version 15.3 or later / VSCODE
 3.  [Nodejs](https://nodejs.org/en/) latest version
 4.  SQL Server 2012 or later
 5.  For terminal use [CMDER](http://cmder.net/)
 6.  Additional software --> [Git for Windows](https://git-scm.com/download/win)
+
+## How to run
+
+1.  Install all require softwares mentioned above
+2.  Clone this repository
+3.  Open Project folder in visual studio / VS code
+4.  If using visual studio
+    1.  Right click on project folder and restore nuget Packages
+    2.  Create database tables and change connection string in appsettings.json file
+    3.  Build and run Project
+5.  If using vsCode
+
+    1.  open terminal in current folder and run
+
+        ```bash
+            dotnet restore
+
+            # then create databse and replace connectionString
+
+            dotnet run # open browser and visit https://localhost:50001
+        ```
 
 ## **Creating Databse and configuring connectionString**
 

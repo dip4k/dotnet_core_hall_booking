@@ -4,6 +4,8 @@
 2.  Visual studio 2017 version 15.3 or later
 3.  [Nodejs](https://nodejs.org/en/) latest version
 4.  SQL Server 2012 or later
+5.  For terminal use [CMDER](http://cmder.net/)
+6.  Additional software --> [Git for Windows](https://git-scm.com/download/win)
 
 ## **Creating Databse and configuring connectionString**
 

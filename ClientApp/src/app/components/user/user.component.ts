@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Customer } from '../../models/customer';
 
 @Component({
   selector: 'app-user',
@@ -6,10 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
-
-  constructor() { }
+  customers: Customer[];
+  constructor(private http: HttpClient) {}
 
   ngOnInit() {
+    this.http.get<Customer[]>('/api/customers').subscribe((cList) => {
+      console.log(cList);
+      this.customers = cList;
+    });
   }
-
 }

@@ -1,20 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace MarriageHall.BOL
+namespace MarriageHall.Controllers.Resources
 {
-  [Table("Customers")]
-  public partial class Customer
-  {
-
+    public class CustomerResource
+    {
     public int CustomerId { get; set; }
     public string Name { get; set; }
     public string Email { get; set; }
     public string Address { get; set; }
     public string AadharNo { get; set; }
-    public int UserId { get; set; }
-
-    public User User { get; set; }
+   
+    public UserResource User { get; set; }
   }
 }

@@ -1,8 +1,10 @@
-export class Customer {
+import { User } from './user';
+
+export interface Customer {
   customerId: number;
-  userName: string;
   name: string;
-  mobileNo: number;
-  password: string;
   email: string;
+  address: string;
+  aadharNo: string;
+  user: User;
 }

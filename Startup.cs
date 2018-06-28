@@ -1,3 +1,4 @@
+using AutoMapper;
 using MarriageHall.DAL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,6 +32,10 @@ namespace marriage_hall
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
+
+      // AutoMapper service for Dependency Injecction
+      services.AddAutoMapper();
+
       // User Created Services
       services.AddDbContext<HallBookingContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 

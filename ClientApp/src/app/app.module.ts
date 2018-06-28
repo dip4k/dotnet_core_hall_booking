@@ -1,15 +1,16 @@
 // modules
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AppRoutingModule } from '../app/routing/app-routing.module';
+import { AppRoutingModule } from './app.routes';
 import { ToastrModule } from 'ngx-toastr';
 
 // services
-
+import { ErrorLogService } from './services/error.log.service';
+import { AppErrorHandler } from './error-handling/app.error-handler';
 // components
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
@@ -41,7 +42,7 @@ import { RegisterComponent } from './components/register/register.component';
     BrowserAnimationsModule,
     ToastrModule.forRoot()
   ],
-  providers: [],
+  providers: [ErrorLogService, { provide: ErrorHandler, useClass: AppErrorHandler }],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

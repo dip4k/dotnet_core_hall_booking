@@ -2,47 +2,38 @@
   <div class="row">
     <div class="col"></div>
     <div class="col-6">
-      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <form #f="ngForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <label for="name">Name</label>
-          <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
-          <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
-            <div *ngIf="f.name.errors.required">First Name is required</div>
-          </div>
+          <input type="text" class="form-control" id="name" name="name" [(ngModel)]="customer.name" required>
         </div>
 
         <div class="form-group">
           <label for="userName">Username</label>
-          <input type="text" formControlName="userName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.userName.errors }" />
-          <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
-            <div *ngIf="f.userName.errors.required">Username is required</div>
-          </div>
+          <input type="text" class="form-control" id="userName" name="userName" [(ngModel)]="customer.user.userName" required>
         </div>
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-          <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-            <div *ngIf="f.password.errors.required">Password is required</div>
-            <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
-          </div>
+          <input type="password" class="form-control" id="password" name="password" [(ngModel)]="customer.user.password" required/>
         </div>
         <div class="form-group">
           <label for="mobileNo">Mobile No</label>
-          <input type="text" formControlName="mobileNo" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.mobileNo.errors }" />
-          <div *ngIf="submitted && f.mobileNo.errors" class="invalid-feedback">
-            <div *ngIf="f.mobileNo.errors.required">Mobile No is required</div>
-          </div>
+          <input type="text" id="mobileNo" class="form-control" name="mobileNo" [(ngModel)]="customer.user.mobileNo" required/>
         </div>
         <div class="form-group">
           <label for="email">email</label>
-          <input type="email" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
-          <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-            <div *ngIf="f.email.errors.required">Email is required</div>
-          </div>
+          <input type="email" id="email" name="email" class="form-control" [(ngModel)]="customer.email" />
+        </div>
+        <div class="form-group">
+          <label for="address">Address</label>
+          <input type="text" id="address" name="address" class="form-control" [(ngModel)]="customer.address" />
+        </div>
+        <div class="form-group">
+          <label for="aadhar">Aadhar NO</label>
+          <input type="text" id="aadhar" name="aadhar" class="form-control" [(ngModel)]="customer.aadharNo" />
         </div>
         <div class="form-group d-flex justify-content-end">
-          <button [disabled]="loading" class="btn btn-primary">Register</button>
-
+          <button class="btn btn-primary">Register</button>
           <a [routerLink]="['/login']" class="btn btn-link">Cancel</a>
         </div>
       </form>

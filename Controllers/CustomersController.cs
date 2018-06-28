@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using MarriageHall.BOL;
+using MarriageHall.Controllers.Resources;
 using MarriageHall.DAL;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -14,21 +17,25 @@ namespace MarriageHall.Controllers
   public class CustomersController : Controller
   {
     private readonly HallBookingContext _context;
+    private readonly IMapper _mapper;
 
     // HallbookingContext object will be injected by dotnet core engine
     // Configuration for this is written in startup.cs file
     // This is called dependency injection
-    public CustomersController(HallBookingContext context)
+    public CustomersController(HallBookingContext context, IMapper mapper)
     {
       _context = context;
+      _mapper = mapper;
     }
 
     // GET: api/<controller>
     [HttpGet]
     public IActionResult Get()
     {
-      var result = _context.Customer.ToList();
-      return Ok(result);
+      var result = _context.Customers.Include(c => c.User).ToList();
+      var crList = _mapper.Map<IEnumerable<Customer>, IEnumerable<CustomerResource>>(result);
+
+      return Ok(crList);
     }
 
     // GET api/<controller>/5
@@ -36,37 +43,32 @@ namespace MarriageHall.Controllers
     public Customer Get(int id)
     {
       // here id is customerId (primary key from table)
-      return _context.Customer.Find(id);
+      return _context.Customers.Find(id);
     }
 
-    // POST api/<controller>
-    //[HttpPost]
-    //public void Post([FromBody]Customer value)
-    //{
-
-    //}
-
     [HttpPost("login")]
-    public IActionResult Login([FromBody] Customer customer)
+    public IActionResult Login([FromBody] UserResource user)
     {
-      var result = _context.Customer.FirstOrDefault(c => c.UserName == customer.UserName && c.Password == customer.Password);
+      var result = _context.Users.FirstOrDefault(c => c.UserName == user.UserName && c.Password == user.Password);
       if (result == null)
         return NotFound();
-      return Ok(result);
+      var ur = _mapper.Map<User, UserResource>(result);
+
+      return Ok(ur);
     }
 
     [HttpPost]
-    public IActionResult CreateCustomer([FromBody] Customer customer)
+    public IActionResult CreateCustomer([FromBody] CustomerResource customerResource)
     {
       if (!ModelState.IsValid)
         return BadRequest(ModelState);
-
-      _context.Customer.Add(customer);
+      var customer = _mapper.Map<CustomerResource, Customer>(customerResource);
+      _context.Customers.Add(customer);
       _context.SaveChanges();
 
-      var result = _context.Customer.FirstOrDefault(c => c.CustomerId == customer.CustomerId);
-      result.Password = null;
-      return Ok(result);
+      var result = _context.Customers.Include(c => c.User).FirstOrDefault(c => c.CustomerId == customer.CustomerId);
+      var cr = _mapper.Map<Customer, CustomerResource>(result);
+      return Ok(cr);
     }
 
     // PUT api/<controller>/5

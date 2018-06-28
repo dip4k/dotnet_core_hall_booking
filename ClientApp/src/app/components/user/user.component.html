@@ -16,11 +16,11 @@
   </thead>
   <tbody class="bg-lightgrey">
     <tr *ngFor="let c of customers">
-      <td>{{ c.customerId }}</td>
-      <td>{{ c.name }}</td>
-      <td>{{ c.userName }}</td>
-      <td>{{ c.email }}</td>
-      <td>{{c.mobileNo}}</td>
+      <td>{{ c.Id }}</td>
+      <td>{{ c.user.name }}</td>
+      <td>{{ c.user.userName }}</td>
+      <td>{{ c.user.email }}</td>
+      <td>{{c.user.mobileNo}}</td>
     </tr>
   </tbody>
 </table>

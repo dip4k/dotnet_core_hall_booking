@@ -21,20 +21,13 @@ namespace MarriageHall.Migrations
 
             modelBuilder.Entity("MarriageHall.BOL.Admin", b =>
                 {
-                    b.Property<int>("AdminId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Email")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50);
-
                     b.Property<int>("UserId");
 
-                    b.HasKey("AdminId");
+                    b.HasKey("Id");
 
                     b.HasIndex("UserId")
                         .IsUnique();
@@ -44,7 +37,7 @@ namespace MarriageHall.Migrations
 
             modelBuilder.Entity("MarriageHall.BOL.Booking", b =>
                 {
-                    b.Property<int>("BookingId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -55,7 +48,7 @@ namespace MarriageHall.Migrations
 
                     b.Property<int>("HallOwnerId");
 
-                    b.HasKey("BookingId");
+                    b.HasKey("Id");
 
                     b.HasIndex("CustomerId");
 
@@ -66,7 +59,7 @@ namespace MarriageHall.Migrations
 
             modelBuilder.Entity("MarriageHall.BOL.Customer", b =>
                 {
-                    b.Property<int>("CustomerId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -75,16 +68,9 @@ namespace MarriageHall.Migrations
 
                     b.Property<string>("Address");
 
-                    b.Property<string>("Email")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50);
-
                     b.Property<int>("UserId");
 
-                    b.HasKey("CustomerId");
+                    b.HasKey("Id");
 
                     b.HasIndex("UserId")
                         .IsUnique();
@@ -121,7 +107,7 @@ namespace MarriageHall.Migrations
 
             modelBuilder.Entity("MarriageHall.BOL.HallDetail", b =>
                 {
-                    b.Property<int>("HallDetailId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -132,7 +118,7 @@ namespace MarriageHall.Migrations
 
                     b.Property<int>("HallOwnerId");
 
-                    b.HasKey("HallDetailId");
+                    b.HasKey("Id");
 
                     b.HasIndex("HallOwnerId");
 
@@ -141,13 +127,13 @@ namespace MarriageHall.Migrations
 
             modelBuilder.Entity("MarriageHall.BOL.HallOwner", b =>
                 {
-                    b.Property<int>("HallOwnerId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("UserId");
 
-                    b.HasKey("HallOwnerId");
+                    b.HasKey("Id");
 
                     b.HasIndex("UserId")
                         .IsUnique();
@@ -157,13 +143,20 @@ namespace MarriageHall.Migrations
 
             modelBuilder.Entity("MarriageHall.BOL.User", b =>
                 {
-                    b.Property<int>("UserId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(50);
 
                     b.Property<string>("MobileNo")
                         .IsRequired()
                         .HasMaxLength(15);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50);
 
                     b.Property<string>("Password")
                         .IsRequired()
@@ -177,7 +170,7 @@ namespace MarriageHall.Migrations
                         .IsRequired()
                         .HasMaxLength(50);
 
-                    b.HasKey("UserId");
+                    b.HasKey("Id");
 
                     b.ToTable("Users");
                 });

@@ -12,7 +12,7 @@ export class UserComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    this.http.get<Customer[]>('/api/customers').subscribe((cList) => {
+    this.http.get<Customer[]>('/api/users').subscribe((cList) => {
       console.log(cList);
       this.customers = cList;
     });

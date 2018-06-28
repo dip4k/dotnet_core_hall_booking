@@ -7,7 +7,7 @@ namespace MarriageHall.BOL
   [Table("Bookings")]
   public partial class Booking
   {
-    public int BookingId { get; set; }
+    public int Id { get; set; }
     public DateTime BookingDate { get; set; }
     public int HallOwnerId { get; set; }
     public int CustomerId { get; set; }

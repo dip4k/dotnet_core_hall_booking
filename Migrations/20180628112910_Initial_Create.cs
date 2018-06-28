@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MarriageHall.Migrations
 {
-    public partial class firstcreate : Migration
+    public partial class Initial_Create : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,8 +12,10 @@ namespace MarriageHall.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(maxLength: 50, nullable: false),
+                    Email = table.Column<string>(maxLength: 50, nullable: true),
                     UserName = table.Column<string>(maxLength: 50, nullable: false),
                     Password = table.Column<string>(maxLength: 50, nullable: false),
                     MobileNo = table.Column<string>(maxLength: 15, nullable: false),
@@ -21,27 +23,25 @@ namespace MarriageHall.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.UserId);
+                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Admins",
                 columns: table => new
                 {
-                    AdminId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(maxLength: 50, nullable: false),
-                    Email = table.Column<string>(maxLength: 50, nullable: true),
                     UserId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Admins", x => x.AdminId);
+                    table.PrimaryKey("PK_Admins", x => x.Id);
                     table.ForeignKey(
                         name: "FK_AdminUserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "UserId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -49,22 +49,20 @@ namespace MarriageHall.Migrations
                 name: "Customers",
                 columns: table => new
                 {
-                    CustomerId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(maxLength: 50, nullable: false),
-                    Email = table.Column<string>(maxLength: 50, nullable: true),
                     Address = table.Column<string>(nullable: true),
                     AadharNo = table.Column<string>(maxLength: 20, nullable: true),
                     UserId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Customers", x => x.CustomerId);
+                    table.PrimaryKey("PK_Customers", x => x.Id);
                     table.ForeignKey(
                         name: "FK_CustomerUserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "UserId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -72,18 +70,18 @@ namespace MarriageHall.Migrations
                 name: "HallOwners",
                 columns: table => new
                 {
-                    HallOwnerId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     UserId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_HallOwners", x => x.HallOwnerId);
+                    table.PrimaryKey("PK_HallOwners", x => x.Id);
                     table.ForeignKey(
                         name: "FK_OwnerUserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "UserId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -91,7 +89,7 @@ namespace MarriageHall.Migrations
                 name: "Bookings",
                 columns: table => new
                 {
-                    BookingId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     BookingDate = table.Column<DateTime>(type: "datetime", nullable: false),
                     HallOwnerId = table.Column<int>(nullable: false),
@@ -99,18 +97,18 @@ namespace MarriageHall.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Bookings", x => x.BookingId);
+                    table.PrimaryKey("PK_Bookings", x => x.Id);
                     table.ForeignKey(
                         name: "FK_BookingCustomerId",
                         column: x => x.CustomerId,
                         principalTable: "Customers",
-                        principalColumn: "CustomerId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_BookingOwnerId",
                         column: x => x.HallOwnerId,
                         principalTable: "HallOwners",
-                        principalColumn: "HallOwnerId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -133,7 +131,7 @@ namespace MarriageHall.Migrations
                         name: "FK_PricingHallOwnerId",
                         column: x => x.HallOwnerId,
                         principalTable: "HallOwners",
-                        principalColumn: "HallOwnerId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -141,7 +139,7 @@ namespace MarriageHall.Migrations
                 name: "HallDetails",
                 columns: table => new
                 {
-                    HallDetailId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     HallName = table.Column<string>(nullable: false),
                     HallCapacity = table.Column<int>(nullable: false),
@@ -149,12 +147,12 @@ namespace MarriageHall.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_HallDetails", x => x.HallDetailId);
+                    table.PrimaryKey("PK_HallDetails", x => x.Id);
                     table.ForeignKey(
                         name: "FK_HallOwnerId",
                         column: x => x.HallOwnerId,
                         principalTable: "HallOwners",
-                        principalColumn: "HallOwnerId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 

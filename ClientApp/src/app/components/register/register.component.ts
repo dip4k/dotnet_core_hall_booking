@@ -13,13 +13,20 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class RegisterComponent implements OnInit {
   customer: Customer = {
-    customerId: 0,
-    name: '',
-    email: '',
+    Id: 0,
     address: '',
     aadharNo: '',
-    user: { userId: 0, userName: '', password: '', mobileNo: '', role: 'customer' }
+    user: {
+      userId: 0,
+      userName: '',
+      password: '',
+      mobileNo: '',
+      role: 'customer',
+      name: '',
+      email: ''
+    }
   };
+  Roles = ['customer', 'hall-owner', 'admin'];
   constructor(
     private router: Router,
     private http: HttpClient,
@@ -27,8 +34,16 @@ export class RegisterComponent implements OnInit {
   ) {}
 
   ngOnInit() {}
+
+  onRoleChange(e) {
+    const role = e.target.value;
+    this.customer.user.role = '';
+    if (role !== '') {
+      this.customer.user.role = role;
+    }
+  }
   onSubmit() {
-    this.http.post('/api/customers', this.customer).subscribe(
+    this.http.post('/api/users', this.customer).subscribe(
       (data) => {
         console.log(data);
         this.toastr.success('Registration successful');

@@ -8,7 +8,7 @@ namespace MarriageHall.BOL
   public partial class HallOwner
   {
 
-    public int HallOwnerId { get; set; }
+    public int Id { get; set; }
     public int UserId { get; set; }
 
     public User User { get; set; }

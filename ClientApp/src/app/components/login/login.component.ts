@@ -51,20 +51,17 @@ export class LoginComponent implements OnInit {
 
     this.loading = true;
     this.http
-      .post('/api/customers/login', {
+      .post('/api/users/login', {
         userName: this.f.username.value,
         password: this.f.password.value
       })
       .subscribe(
         (data) => {
           console.log(data);
-           this.toastr.success(
-             'welcome ' + data['userName'] + ' !!',
-             'Login Success'
-           );
-           setTimeout((router: Router) => {
-             this.router.navigate([this.returnUrl]);
-           }, 5000);
+          this.toastr.success('welcome ' + data['userName'] + ' !!', 'Login Success');
+          setTimeout((router: Router) => {
+            this.router.navigate([this.returnUrl]);
+          }, 5000);
         },
         (error) => {
           this.toastr.error('Invalid username or password', 'Login Failed');

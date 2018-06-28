@@ -15,12 +15,20 @@ namespace MarriageHall.Mapping
       // Domain Models to Api Resource
       CreateMap<Customer, CustomerResource>();
       CreateMap<User, UserResource>();
+      CreateMap<Admin, OwnerResource>();
+      CreateMap<HallOwner, OwnerResource>();
 
 
 
       // Api Resource to Domain Models
       CreateMap<CustomerResource, Customer>();
       CreateMap<UserResource, User>();
+      CreateMap<OwnerResource, Admin>();
+      CreateMap<OwnerResource, HallOwner>();
+
+      CreateMap<CustomerResource, HallOwner>().ForSourceMember(c => c.Address, opt => opt.Ignore()).ForSourceMember(c => c.AadharNo, opt => opt.Ignore());
+      CreateMap<CustomerResource, Admin>().ForSourceMember(c => c.Address, opt => opt.Ignore()).ForSourceMember(c => c.AadharNo, opt => opt.Ignore());
+
 
 
     }

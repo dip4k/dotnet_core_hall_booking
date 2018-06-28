@@ -5,12 +5,9 @@ using System.Threading.Tasks;
 
 namespace MarriageHall.Controllers.Resources
 {
-  public class CustomerResource
+  public class OwnerResource
   {
     public int Id { get; set; }
-
-    public string Address { get; set; }
-    public string AadharNo { get; set; }
 
     public UserResource User { get; set; }
   }

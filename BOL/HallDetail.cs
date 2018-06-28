@@ -7,7 +7,7 @@ namespace MarriageHall.BOL
   [Table("HallDetails")]
   public partial class HallDetail
   {
-    public int HallDetailId { get; set; }
+    public int Id { get; set; }
     public string HallName { get; set; }
     public int HallCapacity { get; set; }
     public int HallOwnerId { get; set; }

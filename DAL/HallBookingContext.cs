@@ -30,13 +30,9 @@ namespace MarriageHall.DAL
     {
       modelBuilder.Entity<Admin>(entity =>
       {
-        entity.HasKey(e => e.AdminId);
+        entity.HasKey(e => e.Id);
 
-        entity.Property(e => e.Email).HasMaxLength(50);
 
-        entity.Property(e => e.Name)
-            .IsRequired()
-            .HasMaxLength(50);
 
         entity.HasOne(d => d.User)
             .WithOne()
@@ -46,7 +42,7 @@ namespace MarriageHall.DAL
 
       modelBuilder.Entity<Booking>(entity =>
       {
-        entity.HasKey(e => e.BookingId);
+        entity.HasKey(e => e.Id);
 
         entity.Property(e => e.BookingDate).HasColumnType("datetime");
 
@@ -65,15 +61,11 @@ namespace MarriageHall.DAL
 
       modelBuilder.Entity<Customer>(entity =>
       {
-        entity.HasKey(e => e.CustomerId);
+        entity.HasKey(e => e.Id);
 
         entity.Property(e => e.AadharNo).HasMaxLength(20);
 
-        entity.Property(e => e.Email).HasMaxLength(50);
 
-        entity.Property(e => e.Name)
-            .IsRequired()
-            .HasMaxLength(50);
 
         entity.HasOne(d => d.User)
             .WithOne()
@@ -100,7 +92,7 @@ namespace MarriageHall.DAL
 
       modelBuilder.Entity<HallDetail>(entity =>
       {
-        entity.HasKey(e => e.HallDetailId);
+        entity.HasKey(e => e.Id);
 
         entity.Property(e => e.HallName).IsRequired();
 
@@ -113,7 +105,7 @@ namespace MarriageHall.DAL
 
       modelBuilder.Entity<HallOwner>(entity =>
       {
-        entity.HasKey(e => e.HallOwnerId);
+        entity.HasKey(e => e.Id);
 
         entity.HasOne(d => d.User)
             .WithOne()
@@ -123,7 +115,13 @@ namespace MarriageHall.DAL
 
       modelBuilder.Entity<User>(entity =>
       {
-        entity.HasKey(e => e.UserId);
+        entity.HasKey(e => e.Id);
+
+        entity.Property(e => e.Email).HasMaxLength(50);
+
+        entity.Property(e => e.Name)
+            .IsRequired()
+            .HasMaxLength(50);
 
         entity.Property(e => e.MobileNo)
             .IsRequired()
